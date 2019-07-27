@@ -13,8 +13,11 @@ import {
   ScrollView,
   TextInput
 } from 'react-native';
+
 var { width, height } = Dimensions.get('window');
+
 import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class CustomMultiPicker extends Component {
   constructor(props){
@@ -105,7 +108,7 @@ export default class CustomMultiPicker extends Component {
       <View onLayout={(evt)=>{this.getNewDimensions(evt)}}>
         {this.props.search && <View style={{ flexDirection: 'row', height: 55 }}>
           <View style={{ marginTop: 15, marginLeft: 15, backgroundColor: 'transparent' }}>
-            <Icon name="ios-search-outline" color={this.props.iconColor} size={25}/>
+            <Icon name="search" color={this.props.iconColor} size={25}/>
           </View>
           <TextInput
             style={{
@@ -128,14 +131,14 @@ export default class CustomMultiPicker extends Component {
           />
         </View>}
         <ScrollView
-          style={[{ padding: 5, height: this.props.scrollViewHeight }, this.props.scrollViewStyle]}
+          style={{ padding: 5, height: this.props.scrollViewHeight }}
         >
           {labels.map((label, index) => {
             const itemKey = returnValue == "label" ? label : values[index]
             return(
               <TouchableOpacity
                 key={Math.round(Math.random() * 1000000)}
-                style={[{
+                style={{
                   padding: 7,
                   marginTop: 0,
                   marginLeft: 2,
@@ -147,29 +150,18 @@ export default class CustomMultiPicker extends Component {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   borderRadius: this.props.rowRadius
-                },
-                  this.props.itemStyle
-                ]}
+                }}
                 onPress={() => {
                   this._onSelect(itemKey)
                 }}
               >
-                {React.isValidElement(label)
-                  ?
-                  label
-                  :
-                  <Text style={this.props.labelStyle}>{label}</Text>
-                }
+                <Text>{label}</Text>
                 {
 
                   this._isSelected(itemKey) ?
-                  <Icon name={this.props.selectedIconName}
-                        style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.selectedIconStyle]}
-                        />
+                  <Icon name={this.props.selectedIconName} color={this.props.iconColor} size={this.props.iconSize} />
                   :
-                  <Icon name={this.props.unselectedIconName}
-                        style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.unselectedIconStyle]}
-                        />
+                  <Icon name={this.props.unselectedIconName} color={this.props.iconColor} size={this.props.iconSize} />
                 }
               </TouchableOpacity>
             )
