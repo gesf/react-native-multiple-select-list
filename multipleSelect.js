@@ -17,7 +17,7 @@ import {
 var { width, height } = Dimensions.get('window');
 
 import Icon from 'react-native-vector-icons/Ionicons';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import IconSecondary from 'react-native-vector-icons/FontAwesome';
 
 export default class CustomMultiPicker extends Component {
   constructor(props){
@@ -108,7 +108,7 @@ export default class CustomMultiPicker extends Component {
       <View onLayout={(evt)=>{this.getNewDimensions(evt)}}>
         {this.props.search && <View style={{ flexDirection: 'row', height: 55 }}>
           <View style={{ marginTop: 15, marginLeft: 15, backgroundColor: 'transparent' }}>
-            <Icon name="search" color={this.props.iconColor} size={25}/>
+            <IconSecondary name="search" color={this.props.iconColor} size={20}/>
           </View>
           <TextInput
             style={{
@@ -155,7 +155,7 @@ export default class CustomMultiPicker extends Component {
                   this._onSelect(itemKey)
                 }}
               >
-                <Text>{label}</Text>
+                <Text style={this.props.rowStyle}>{label}</Text>
                 {
 
                   this._isSelected(itemKey) ?
